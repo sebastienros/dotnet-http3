@@ -11,6 +11,16 @@ FROM mcr.microsoft.com/dotnet/aspnet:6.0
 WORKDIR /app
 COPY --from=build-env /app/out .
 
-RUN apt install libmsquic
+# Install libmsquic dependencies
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        curl \
+        wget \
+        gnupg2 \
+        software-properties-common
+
+RUN if [ "$(uname -m)" != "aarch64" ] ; then curl -sSL https://packages.microsoft.com/keys/microsoft.asc | apt-key add - ; fi
+RUN if [ "$(uname -m)" != "aarch64" ] ; then apt-add-repository https://packages.microsoft.com/debian/10/prod ; fi
+RUN if [ "$(uname -m)" != "aarch64" ] ; then apt-get update && apt-get install -y --no-install-recommends libmsquic ; fi
 
 ENTRYPOINT ["dotnet", "dotnet-http3.dll"]
