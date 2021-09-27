@@ -1,8 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<RootNamespace>DotnetHttp3</RootNamespace>
+		<EnablePreviewFeatures>True</EnablePreviewFeatures>
 	</PropertyGroup>
 
 	<ItemGroup>
