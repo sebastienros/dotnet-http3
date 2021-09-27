@@ -17,12 +17,12 @@ builder.WebHost.UseKestrel(k =>
         // Adds a TLS certificate to the endpoint
         listenOptions.UseHttps(httpsOptions =>
         {
-            //httpsOptions.UseLettuceEncrypt(services);
+            httpsOptions.UseLettuceEncrypt(services);
         });
     });
 })
-    //.ConfigureServices(services => services.AddLettuceEncrypt())
-    ;
+.ConfigureServices(services => services.AddLettuceEncrypt())
+;
 
 var app = builder.Build();
 
