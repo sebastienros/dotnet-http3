@@ -19,8 +19,7 @@ RUN apt update \
         gnupg2 \
         software-properties-common
 
-RUN if [ "$(uname -m)" != "aarch64" ] ; then curl -sSL https://packages.microsoft.com/keys/microsoft.asc | apt-key add - ; fi
-RUN if [ "$(uname -m)" != "aarch64" ] ; then apt-add-repository https://packages.microsoft.com/debian/11/prod ; fi
-RUN if [ "$(uname -m)" != "aarch64" ] ; then apt-get update && apt-get install -y --no-install-recommends libmsquic ; fi
+RUN curl -O https://packages.microsoft.com/debian/10/prod/pool/main/libm/libmsquic/libmsquic-1.5.0-amd64.deb
+RUN dpkg -i libmsquic-1.5.0-amd64.deb
 
 ENTRYPOINT ["dotnet", "dotnet-http3.dll"]

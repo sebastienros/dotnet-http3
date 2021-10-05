@@ -1,1 +1,5 @@
-﻿
+﻿# Build image named 'http3' from local Docker file
+sudo docker build -t http3 .
+
+# Run new container named 'http3' and expose all port to local interface
+sudo docker run --name http3 -d --network host http3
