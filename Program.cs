@@ -3,6 +3,8 @@ using System.Net;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddLettuceEncrypt();
+
 builder.WebHost.UseKestrel(k =>
 {
     var services = k.ApplicationServices;
@@ -20,9 +22,7 @@ builder.WebHost.UseKestrel(k =>
             httpsOptions.UseLettuceEncrypt(services);
         });
     });
-})
-.ConfigureServices(services => services.AddLettuceEncrypt())
-;
+});
 
 var app = builder.Build();
 
